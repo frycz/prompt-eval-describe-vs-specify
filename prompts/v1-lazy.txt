@@ -1,0 +1,4 @@
+Classify this support ticket into one of these categories:
+billing, bug, feature_request, account_access, how_to, integration, performance, spam
+
+Answer with the category name and nothing else.

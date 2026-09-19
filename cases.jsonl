@@ -1,0 +1,44 @@
+{"id": "t01", "tag": "easy", "input": "I was charged twice for the October invoice. Can you refund the duplicate?", "expected": "billing"}
+{"id": "t02", "tag": "easy", "input": "Clicking Export CSV does nothing. Console shows: Uncaught TypeError: rows is undefined at export.js:42", "expected": "bug"}
+{"id": "t03", "tag": "easy", "input": "Would love to see dark mode in the dashboard. My eyes are bleeding at 2am.", "expected": "feature_request"}
+{"id": "t04", "tag": "easy", "input": "I've been locked out after too many failed 2FA attempts. Please reset my authenticator.", "expected": "account_access"}
+{"id": "t05", "tag": "easy", "input": "Where do I find the setting to change my timezone?", "expected": "how_to"}
+{"id": "t06", "tag": "easy", "input": "Our Salesforce sync stopped pulling new leads after we rotated the OAuth token yesterday.", "expected": "integration"}
+{"id": "t07", "tag": "easy", "input": "Report pages take 40+ seconds to load since Tuesday. They used to be instant.", "expected": "performance"}
+{"id": "t08", "tag": "easy", "input": "MAKE $5000/WEEK FROM HOME!!! Click here: bit.ly/notascam", "expected": "spam"}
+{"id": "t09", "tag": "edge", "input": "Your app is broken, it won't let me log in. Says my password is wrong but I know it isn't.", "expected": "account_access"}
+{"id": "t10", "tag": "edge", "input": "There's a bug in your billing page, the annual price shows monthly. I nearly bought the wrong plan.", "expected": "bug"}
+{"id": "t11", "tag": "edge", "input": "I can't figure out how to invite a teammate. Is that even possible? If not you should add it.", "expected": "how_to"}
+{"id": "t12", "tag": "edge", "input": "The API is really slow, like 8 seconds per call. Is that expected or am I doing something wrong?", "expected": "performance"}
+{"id": "t13", "tag": "edge", "input": "We got an invoice for 12 seats but our Okta SCIM provisioning only ever created 9 users.", "expected": "billing", "also_accept": ["integration"], "label_note": "Missing fact: is the invoice wrong (billing) or did SCIM fail to create 3 users who should exist (integration)? The ticket supports both. Added 2026-09-15 after a label audit of all 44 cases."}
+{"id": "t14", "tag": "edge", "input": "Please cancel my subscription and delete my account. I'm not using it anymore.", "expected": "billing"}
+{"id": "t15", "tag": "edge", "input": "Your Zapier action returns 200 but the record never appears. Same payload works via curl.", "expected": "integration"}
+{"id": "t16", "tag": "edge", "input": "Hi! Quick question — does the Pro plan include SSO, or is that Enterprise only?", "expected": "how_to"}
+{"id": "t17", "tag": "edge", "input": "Dashboard freezes the whole browser tab when I filter to more than ~50k rows. Chrome 131, M2 Mac.", "expected": "performance"}
+{"id": "t18", "tag": "edge", "input": "Great product. One thing: webhooks retry only 3 times. We'd need at least 10 for our SLA.", "expected": "feature_request"}
+{"id": "t19", "tag": "edge", "input": "hello i am reaching out regarding a partnership opportunity for your esteemed company. we offer SEO services", "expected": "spam"}
+{"id": "t20", "tag": "edge", "input": "Team member left. Need to transfer his workspace ownership to me but I don't see the option.", "expected": "account_access"}
+{"id": "t21", "tag": "edge", "input": "Upgraded to Pro an hour ago, card was charged, but the app still shows me on Free.", "expected": "bug"}
+{"id": "t22", "tag": "edge", "input": "Can you add a webhook for the invoice.paid event? We're currently polling every minute which is silly.", "expected": "feature_request"}
+{"id": "h01", "tag": "holdout", "input": "Got a refund confirmation email 10 days ago but the money still isn't back on my card.", "expected": "billing"}
+{"id": "h02", "tag": "holdout", "input": "The date picker lets me pick Feb 30 and then saves the report with an empty date field.", "expected": "bug"}
+{"id": "h03", "tag": "holdout", "input": "Every nightly HubSpot sync creates duplicate contacts on the HubSpot side. Contacts look fine in your app.", "expected": "integration"}
+{"id": "h04", "tag": "holdout", "input": "I changed my email address and now the magic sign-in link goes to my old inbox, so I can't get in.", "expected": "account_access"}
+{"id": "h05", "tag": "holdout", "input": "Search is totally broken — takes over a minute to return anything once a project has 10k+ tasks.", "expected": "performance"}
+{"id": "h06", "tag": "holdout", "input": "Search results include tasks from a project I deleted last month.", "expected": "bug"}
+{"id": "h07", "tag": "holdout", "input": "Is there a keyboard shortcut to duplicate a task? Would be really handy if not.", "expected": "how_to"}
+{"id": "h08", "tag": "holdout", "input": "Please let us set retention per project. Everything is fixed at 90 days and legal needs 7 years for some projects.", "expected": "feature_request"}
+{"id": "h09", "tag": "holdout", "input": "We'd like to move from Business down to Pro at the end of the current cycle.", "expected": "billing"}
+{"id": "h10", "tag": "holdout", "input": "I'm the only admin and I lost the phone with my authenticator app on it.", "expected": "account_access"}
+{"id": "h11", "tag": "holdout", "input": "The GitHub integration stopped linking commits to tasks after we renamed our GitHub org.", "expected": "integration"}
+{"id": "h12", "tag": "holdout", "input": "We cancelled in February and still got billed for March. Your Slack bot even posted the cancellation confirmation.", "expected": "billing"}
+{"id": "h13", "tag": "holdout", "input": "Bulk-updating 5,000 tasks takes about 20 minutes and the page is unusable the whole time.", "expected": "performance"}
+{"id": "h14", "tag": "holdout", "input": "Dear team, we are a leading offshore development agency with 200+ engineers. Can we book a call to discuss your roadmap?", "expected": "spam"}
+{"id": "h15", "tag": "holdout", "input": "Google Calendar shows my synced events in UTC, but inside your app the times are correct.", "expected": "integration"}
+{"id": "h16", "tag": "holdout", "input": "Is the audit log available on the Team plan, and how far back does it go?", "expected": "how_to"}
+{"id": "h17", "tag": "holdout", "input": "Checkout said my card was declined, but my bank statement shows the charge went through twice.", "expected": "billing"}
+{"id": "h18", "tag": "holdout", "input": "Switched to annual billing yesterday, payment went through, and now the dashboard says my trial expired and hides my projects.", "expected": "bug"}
+{"id": "h19", "tag": "holdout", "input": "The REST API returns created_at as a unix timestamp but the docs say ISO 8601.", "expected": "bug"}
+{"id": "h20", "tag": "holdout", "input": "Could you add Microsoft Teams notifications? You only support Slack right now.", "expected": "feature_request"}
+{"id": "h21", "tag": "holdout", "input": "File uploads are capped at 100MB. Can you raise it to 500MB for our plan? We handle video.", "expected": "feature_request"}
+{"id": "h22", "tag": "holdout", "input": "Our old manager was the only workspace admin and has left the company. How do I get admin rights?", "expected": "account_access"}

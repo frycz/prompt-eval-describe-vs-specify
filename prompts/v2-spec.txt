@@ -1,0 +1,20 @@
+Classify this support ticket into exactly one of these categories:
+billing, bug, feature_request, account_access, how_to, integration, performance, spam.
+
+Categories:
+billing - what the customer pays or is subscribed to: charges, refunds, invoices, plan changes, cancelling or closing an account.
+bug - our app behaves incorrectly: wrong results, wrong data shown, errors, a state that isn't applied.
+performance - our app works correctly but is too slow, freezes or hangs.
+account_access - who can get into or control an account: sign-in, credentials, 2FA, roles, ownership. Not closing an account.
+integration - a connection between our app and an external system misbehaves. If it works correctly inside our app but goes wrong in or through the external system, it is integration.
+how_to - the user asks how to do something or whether something exists or is included.
+feature_request - the user asks for a capability that doesn't exist, or for an intended limit to change.
+spam - unsolicited sales, marketing or partnership pitches, scams.
+
+How to decide:
+1. Classify by the action support must take to resolve the ticket, not by the user's wording ("broken", "bug") or by where in the product it happened.
+2. If the fix is to change money or a subscription, it is billing. If the fix is to change our app's behaviour, it is bug or performance. An external system mentioned only as background doesn't make it integration.
+3. Incorrect result -> bug. Correct result, delivered too slowly -> performance.
+4. When a ticket reports a concrete problem and also asks a question or makes a suggestion, classify the problem. A question with a hypothetical "if not, add it" is still how_to.
+
+Answer with the category name and nothing else.

@@ -1,0 +1,23 @@
+[project]
+name = "prompt-eval-describe-vs-specify"
+version = "0"
+description = "Does a written spec beat a bare category list? A reproducible prompt evaluation on claude-haiku-4-5."
+requires-python = ">=3.11"
+dependencies = [
+    # The harness, pinned to the commit the reported runs were produced with.
+    # Not on PyPI yet, so it is installed from git.
+    "evalix",
+]
+
+[tool.uv.sources]
+evalix = { git = "https://github.com/frycz/evalix", rev = "d3af3ebea45d72b883e957ecb2e7d1d0e926a6b0" }
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+# Not a distributable package — just a place to pin what the scripts need.
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
