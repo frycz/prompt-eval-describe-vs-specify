@@ -25,6 +25,52 @@ Classify a customer support ticket into exactly one of 8 categories:
 `billing`, `bug`, `feature_request`, `account_access`, `how_to`,
 `integration`, `performance`, `spam`.
 
+## The two prompts
+
+Everything below is a claim about the difference between these two texts. Both
+are sent as the system prompt, with the ticket as the user message.
+
+| Prompt | Words | What it contains |
+|---|---:|---|
+| `v1-lazy` | 25 | The category list and "answer with the category name" |
+| `v2-spec` | 283 | A definition for every category, and four tie-break rules |
+
+### [`v1-lazy`](prompts/v1-lazy.txt)
+
+```text
+Classify this support ticket into one of these categories:
+billing, bug, feature_request, account_access, how_to, integration, performance, spam
+
+Answer with the category name and nothing else.
+```
+
+### [`v2-spec`](prompts/v2-spec.txt)
+
+```text
+Classify this support ticket into exactly one of these categories:
+billing, bug, feature_request, account_access, how_to, integration, performance, spam.
+
+Categories:
+billing - what the customer pays or is subscribed to: charges, refunds, invoices, plan changes, cancelling or closing an account.
+bug - our app behaves incorrectly: wrong results, wrong data shown, errors, a state that isn't applied.
+performance - our app works correctly but is too slow, freezes or hangs.
+account_access - who can get into or control an account: sign-in, credentials, 2FA, roles, ownership. Not closing an account.
+integration - a connection between our app and an external system misbehaves. If it works correctly inside our app but goes wrong in or through the external system, it is integration.
+how_to - the user asks how to do something or whether something exists or is included.
+feature_request - the user asks for a capability that doesn't exist, or for an intended limit to change.
+spam - unsolicited sales, marketing or partnership pitches, scams.
+
+How to decide:
+1. Classify by the action support must take to resolve the ticket, not by the user's wording ("broken", "bug") or by where in the product it happened.
+2. If the fix is to change money or a subscription, it is billing. If the fix is to change our app's behaviour, it is bug or performance. An external system mentioned only as background doesn't make it integration.
+3. Incorrect result -> bug. Correct result, delivered too slowly -> performance.
+4. When a ticket reports a concrete problem and also asks a question or makes a suggestion, classify the problem. A question with a hypothetical "if not, add it" is still how_to.
+
+Answer with the category name and nothing else.
+```
+
+## The cases
+
 There are 44 hand-written cases ([`cases.jsonl`](cases.jsonl)) with three tags:
 
 | Tag | n | What it is | Example |
@@ -32,13 +78,6 @@ There are 44 hand-written cases ([`cases.jsonl`](cases.jsonl)) with three tags:
 | easy | 8 | One obvious signal | "I was charged twice for the October invoice. Can you refund the duplicate?" → `billing` |
 | edge | 14 | Built on a category boundary | "Your app is broken, it won't let me log in. Says my password is wrong but I know it isn't." → `account_access`, not `bug` |
 | holdout | 22 | Same boundaries, different wording, held back for checking generalisation | "Every nightly HubSpot sync creates duplicate contacts on the HubSpot side. Contacts look fine in your app." → `integration`, not `bug` |
-
-Two prompts were compared (full text in the [appendix](#appendix-prompts)):
-
-| Prompt | Words | What it contains |
-|---|---:|---|
-| `v1-lazy` | 25 | The category list and "answer with the category name" |
-| `v2-spec` | 283 | A definition for every category and four tie-break rules, e.g. "classify by the action support must take, not by the user's wording or where in the product it happened" |
 
 ## Setup
 
@@ -269,39 +308,3 @@ done
 Runs land in `runs/` (gitignored); the four in `results/` are the ones this
 report is computed from. Use `--scorer custom --scorer-file score.py` for
 adjusted scoring.
-
-## Appendix: prompts
-
-### `v1-lazy`
-
-```text
-Classify this support ticket into one of these categories:
-billing, bug, feature_request, account_access, how_to, integration, performance, spam
-
-Answer with the category name and nothing else.
-```
-
-### `v2-spec`
-
-```text
-Classify this support ticket into exactly one of these categories:
-billing, bug, feature_request, account_access, how_to, integration, performance, spam.
-
-Categories:
-billing - what the customer pays or is subscribed to: charges, refunds, invoices, plan changes, cancelling or closing an account.
-bug - our app behaves incorrectly: wrong results, wrong data shown, errors, a state that isn't applied.
-performance - our app works correctly but is too slow, freezes or hangs.
-account_access - who can get into or control an account: sign-in, credentials, 2FA, roles, ownership. Not closing an account.
-integration - a connection between our app and an external system misbehaves. If it works correctly inside our app but goes wrong in or through the external system, it is integration.
-how_to - the user asks how to do something or whether something exists or is included.
-feature_request - the user asks for a capability that doesn't exist, or for an intended limit to change.
-spam - unsolicited sales, marketing or partnership pitches, scams.
-
-How to decide:
-1. Classify by the action support must take to resolve the ticket, not by the user's wording ("broken", "bug") or by where in the product it happened.
-2. If the fix is to change money or a subscription, it is billing. If the fix is to change our app's behaviour, it is bug or performance. An external system mentioned only as background doesn't make it integration.
-3. Incorrect result -> bug. Correct result, delivered too slowly -> performance.
-4. When a ticket reports a concrete problem and also asks a question or makes a suggestion, classify the problem. A question with a hypothetical "if not, add it" is still how_to.
-
-Answer with the category name and nothing else.
-```

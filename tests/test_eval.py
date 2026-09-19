@@ -12,6 +12,7 @@ check it, you're guessing.
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -76,6 +77,21 @@ class TestLabelScorer:
         for case in load_cases(CASES_FILE):
             if case.get("also_accept"):
                 assert case.get("label_note"), f"{case.id} accepts a second label without saying why"
+
+
+def test_readme_prompts_match_the_files():
+    """The report quotes both prompts in full. A reader checks the report's
+    claims against what they read there, so a README copy that has drifted
+    from the file actually sent to the model is a lie about the experiment."""
+    readme = (ROOT / "README.md").read_text()
+    quoted = dict(
+        re.findall(r"^### \[`([^`]+)`\][^\n]*\n\n```text\n(.*?)\n```", readme, re.S | re.M)
+    )
+    assert set(quoted) == {p.stem for p in PROMPTS}, "a prompt is missing from the report"
+    for name, body in quoted.items():
+        assert body.strip() == (ROOT / "prompts" / f"{name}.txt").read_text().strip(), (
+            f"README's {name} block has drifted from prompts/{name}.txt"
+        )
 
 
 class TestSavedRuns:
